@@ -71,6 +71,11 @@ if ($action == 'index_lists') {
         $item_DB::renameItem($itemID, $title);
     } 
     $current_list = $list_DB->getList($listID);
+} else if ($action == 'delete_item') {
+    $listID = filter_input(INPUT_POST, 'listID', FILTER_VALIDATE_INT);
+    $itemID = filter_input(INPUT_POST, 'itemID', FILTER_VALIDATE_INT); 
+    $item_DB::deleteItem($itemID);
+    $current_list = $list_DB->getList($listID);
 }
 if ($current_list != NULL) {
     $items = $item_DB->getItemsByList($current_list->getID());

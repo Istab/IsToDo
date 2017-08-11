@@ -30,5 +30,10 @@ class todo_item_DB {
         $query = "UPDATE todo_item SET status = '$status' WHERE itemID = '$itemID'"; 
         $db->exec($query);
     }
+    public function deleteItem($itemID) {
+        $db = Database::getDB();
+        $query = "DELETE FROM todo_item WHERE itemID = '$itemID'";
+        $db->exec($query);
+    }
 }
 ?>
