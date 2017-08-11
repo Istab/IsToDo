@@ -16,4 +16,31 @@
       </form>
     <?php } ?>
   </h2>
+  <?php if ($items == NULL){ ?>
+    <h3 class="red-text"><?php echo 'The list is empty' ?></h3>
+  <?php } ?>
+  <table>
+    <?php foreach($items as $item) : ?>
+      <td><?php echo $item->getItemTitle(); ?></td>
+      <td>
+      </td>
+    </tr>
+    <?php endforeach; ?>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td>
+          <form action="." method="post" >
+            <input type="hidden" name="action" value="add_item" />
+            <input type="hidden" name="status" value="Not_started" />
+            <input type="hidden" name="listID" value="<?php echo $current_list->getID(); ?>" />
+            <input class="form-input" type="text" name="item_title" placeholder="Add a new item">
+        </td>
+        <td>
+            <input class="green button" type="submit" value="┼">
+          </form>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
 <?php } ?>

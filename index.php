@@ -2,8 +2,11 @@
 require('models/database.php');
 require('models/todo_list.php');
 require('models/todo_list_db.php');
+require('models/todo_item.php');
+require('models/todo_item_db.php');
 
 $list_DB = new todo_list_DB();
+$item_DB = new todo_item_DB();
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -16,9 +19,10 @@ if ($action == 'index_lists') {
     $listID = filter_input(INPUT_GET, 'listID', FILTER_VALIDATE_INT);
     $rename_list = filter_input(INPUT_GET, 'rename_list', FILTER_VALIDATE_BOOLEAN);
     if ($listID == NULL || $listID == FALSE) {
-        $listID = $list_DB->getFirstList()->getID();
+        $current_list = $list_DB->getFirstList();
+    } else {
+        $current_list = $list_DB->getList($listID);
     } 
-    $current_list = $list_DB->getList($listID);
 } else if ($action == 'add_list') { 
     $title = filter_input(INPUT_POST, 'title'); 
     if ($title == NULL || $title == FALSE) {
@@ -40,7 +44,21 @@ if ($action == 'index_lists') {
         $error = "Error: Please provide a valid list title";
     }
     $current_list = $list_DB->getList($listID);
+} else if ($action == 'add_item') {
+    $item_title = filter_input(INPUT_POST, 'item_title');
+    $status = filter_input(INPUT_POST, 'status');
+    $listID = filter_input(INPUT_POST, 'listID');
+    if ($item_title == NULL || $item_title == FALSE) {
+        $error = "Error: Please provide a valid item name";
+    } else {
+        $item_DB::addItem($item_title, $status, $listID);
+        $current_list = $list_DB->getList($listID);
+    }
+}
+if ($current_list != NULL) {
+    $items = $item_DB->getItemsByList($current_list->getID());
 }
 $lists = $list_DB->getLists();
+
 include('views/lists.php');
 ?>
