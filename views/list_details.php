@@ -21,10 +21,7 @@
   <?php } ?>
   <table>
     <?php foreach($items as $item) : ?>
-      <td><?php echo $item->getItemTitle(); ?></td>
-      <td>
-      </td>
-    </tr>
+      <?php include 'item.php'; ?>
     <?php endforeach; ?>
     <tfoot>
       <tr>

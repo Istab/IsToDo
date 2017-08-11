@@ -18,6 +18,7 @@ if ($action == NULL) {
 if ($action == 'index_lists') {
     $listID = filter_input(INPUT_GET, 'listID', FILTER_VALIDATE_INT);
     $rename_list = filter_input(INPUT_GET, 'rename_list', FILTER_VALIDATE_BOOLEAN);
+    $rename_itemID = filter_input(INPUT_GET, 'rename_itemID', FILTER_VALIDATE_INT);
     if ($listID == NULL || $listID == FALSE) {
         $current_list = $list_DB->getFirstList();
     } else {
@@ -52,8 +53,24 @@ if ($action == 'index_lists') {
         $error = "Error: Please provide a valid item name";
     } else {
         $item_DB::addItem($item_title, $status, $listID);
-        $current_list = $list_DB->getList($listID);
     }
+    $current_list = $list_DB->getList($listID);
+} else if ($action == 'toggle_item') {
+    $itemID = filter_input(INPUT_POST, 'itemID', FILTER_VALIDATE_INT);
+    $listID = filter_input(INPUT_POST, 'listID', FILTER_VALIDATE_INT);
+    $status = filter_input(INPUT_POST, 'status');
+    $item_DB::toggleItem($itemID, $status);
+    $current_list = $list_DB->getList($listID);
+} else if ($action == 'rename_item') {
+    $itemID = filter_input(INPUT_POST, 'itemID', FILTER_VALIDATE_INT);
+    $title = filter_input(INPUT_POST, 'title');
+    $listID = filter_input(INPUT_POST, 'listID', FILTER_VALIDATE_INT);
+    if ($title == NULL || $title == FALSE) {
+        $error = "Error: Please provide a valid item name";
+    } else {
+        $item_DB::renameItem($itemID, $title);
+    } 
+    $current_list = $list_DB->getList($listID);
 }
 if ($current_list != NULL) {
     $items = $item_DB->getItemsByList($current_list->getID());

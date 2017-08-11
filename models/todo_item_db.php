@@ -20,5 +20,15 @@ class todo_item_DB {
         $query = "INSERT INTO todo_item (item_title , status , listID) VALUES ('$title' , '$status' , '$listID')";
         $db->exec($query);
     }
+    public function renameItem($itemID, $item_title) {
+        $db = Database::getDB();
+        $query = "UPDATE todo_item SET item_title = '$item_title' WHERE itemID = '$itemID'"; 
+        $db->exec($query);
+    }
+    public function toggleItem($itemID, $status) {
+        $db = Database::getDB();
+        $query = "UPDATE todo_item SET status = '$status' WHERE itemID = '$itemID'"; 
+        $db->exec($query);
+    }
 }
 ?>
