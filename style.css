@@ -18,6 +18,11 @@
 .lists {
     width: 45%;
 }
+.list-details{
+    float: right;
+    width: 45%;
+    margin-right: 10px;
+}
 
 .App-header {
     background-color: #222;

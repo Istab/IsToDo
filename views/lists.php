@@ -5,6 +5,9 @@
   <body>
     <?php include 'header.php'; ?>
   <h3 class='red-text'><?php echo $error ?></h3>
+    <div class='list-details'>
+      <?php include 'list_details.php'; ?>
+    </div>
     <div class='lists'>
       <h2>Lists</h2>
       <?php include 'lists_table.php'; ?>

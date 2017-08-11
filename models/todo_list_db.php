@@ -48,4 +48,9 @@ class todo_list_DB {
         }
         return $lists;
     }
+    public function renameList($listID, $title) {
+        $db = Database::getDB();
+        $query = "UPDATE todo_list SET title = '$title' WHERE listID = '$listID'";
+        $row_count = $db->exec($query);
+    }
 }

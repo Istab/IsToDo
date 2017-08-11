@@ -9,17 +9,17 @@ $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
     $action = filter_input(INPUT_GET, 'action');
     if ($action == NULL) {
-        $action = 'list_tasks';
+        $action = 'index_lists';
     }
 }  
-if ($action == 'list_tasks') {
+if ($action == 'index_lists') {
     $listID = filter_input(INPUT_GET, 'listID', FILTER_VALIDATE_INT);
+    $rename_list = filter_input(INPUT_GET, 'rename_list', FILTER_VALIDATE_BOOLEAN);
     if ($listID == NULL || $listID == FALSE) {
         $listID = $list_DB->getFirstList()->getID();
     } 
     $current_list = $list_DB->getList($listID);
     $lists = $list_DB->getLists();
-    include('views/lists.php');
 } else if ($action == 'add_list') { 
     $title = filter_input(INPUT_POST, 'title'); 
     if ($title == NULL || $title == FALSE) {
@@ -29,6 +29,16 @@ if ($action == 'list_tasks') {
         $current_list = $list_DB->getAddedList($title);
         $lists = $list_DB->getLists();
     }
-    include('views/lists.php');
+} else if ($action == 'rename_list') {
+    $title = filter_input(INPUT_POST, 'title');
+    $listID = filter_input(INPUT_POST, 'listID', FILTER_VALIDATE_INT);
+    if ($title != NULL && $title != FALSE) {
+        $list_DB::renameList($listID, $title);
+    } else {
+        $error = "Error: Please provide a valid list title";
+    }
+    $current_list = $list_DB->getList($listID);
+    $lists = $list_DB->getLists();
 }
+include('views/lists.php');
 ?>
