@@ -5,6 +5,11 @@ class todo_list_DB {
         $query = "INSERT INTO todo_list (title) VALUES ('$title')";
         $db->exec($query);
     }
+    public function deleteList($listID) {
+        $db = Database::getDB();
+        $query = "DELETE FROM todo_list WHERE listID = '$listID'";
+        $db->exec($query);
+    }
     public function getAddedList($title) {
         $db = Database::getDB();
         $query = "SELECT * FROM todo_list WHERE title = '$title'";
@@ -51,6 +56,6 @@ class todo_list_DB {
     public function renameList($listID, $title) {
         $db = Database::getDB();
         $query = "UPDATE todo_list SET title = '$title' WHERE listID = '$listID'";
-        $row_count = $db->exec($query);
+        $db->exec($query);
     }
 }

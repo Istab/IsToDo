@@ -19,16 +19,18 @@ if ($action == 'index_lists') {
         $listID = $list_DB->getFirstList()->getID();
     } 
     $current_list = $list_DB->getList($listID);
-    $lists = $list_DB->getLists();
 } else if ($action == 'add_list') { 
     $title = filter_input(INPUT_POST, 'title'); 
     if ($title == NULL || $title == FALSE) {
         $error = "Error: Please provide a valid list title";
     } else { 
         $list_DB::addList($title);
-        $current_list = $list_DB->getAddedList($title);
-        $lists = $list_DB->getLists();
     }
+    $current_list = $list_DB->getAddedList($title);
+} else if ($action == 'delete_list') {
+    $listID = filter_input(INPUT_POST, 'listID', FILTER_VALIDATE_INT);
+    $list_DB::deleteList($listID);
+    $current_list = $list_DB->getFirstList();
 } else if ($action == 'rename_list') {
     $title = filter_input(INPUT_POST, 'title');
     $listID = filter_input(INPUT_POST, 'listID', FILTER_VALIDATE_INT);
@@ -38,7 +40,7 @@ if ($action == 'index_lists') {
         $error = "Error: Please provide a valid list title";
     }
     $current_list = $list_DB->getList($listID);
-    $lists = $list_DB->getLists();
 }
+$lists = $list_DB->getLists();
 include('views/lists.php');
 ?>
