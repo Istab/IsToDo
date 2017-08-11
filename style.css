@@ -51,6 +51,13 @@
 .grey {background-color: #e7e7e7; color: black;}
 .black {background-color: #555555;}
 
+tr.done {
+    background-color: #dff0d8;
+}
+tr.not-done {
+    background-color: #f2dede;
+}
+
 .form-input {
     top: 0px;
     padding: 10px;
@@ -58,6 +65,23 @@
 }
 td >> .form-input {
     height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    text-align: center;
+    background-image: url("bg.png");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: 80%;
+    animation: bg-animation 10s linear 0s;
+}
+@keyframes bg-animation {
+    0% { background-image: url("bg.png");}
+    50% { background-image: none;}
+    100% { background-image: none;}
 }
 
 table {
