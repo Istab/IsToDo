@@ -1,0 +1,71 @@
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 50px;
+}
+@keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+.list-title {
+    font-size: large;
+    cursor: pointer;
+    background-color: transparent;
+    text-decoration: none;
+    color: black;
+}
+.lists {
+    width: 45%;
+}
+
+.App-header {
+    background-color: #222;
+    height: 100px;
+    padding: 15px;
+    color: white;
+}
+.red-text {
+    color: #f44336;
+}
+
+.button {
+    border: none;
+    color: white;
+    font-size: large;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+.green {background-color: #4CAF50;}
+.blue {background-color: #008CBA;}
+.red {background-color: #f44336;}
+.grey {background-color: #e7e7e7; color: black;}
+.black {background-color: #555555;}
+
+.form-input {
+    top: 0px;
+    padding: 10px;
+    font-size: large;
+}
+td >> .form-input {
+    height: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+input, button, submit {
+    border:none;
+}
+form {
+    margin: 0em;
+}
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
